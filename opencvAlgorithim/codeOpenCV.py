@@ -7,7 +7,7 @@ from scipy.stats import chisquare
 
 video = cv2.VideoCapture('videoDices.mp4')
 video.set(15, -4)
-contador = 0
+counter = 0
 realTimeReadings = deque([0, 0, 0, 0, 0, 0, 0, 0, 0,], maxlen=10)
 display = deque([0, 0], maxlen=10)
 
@@ -32,7 +32,7 @@ detector = cv2.SimpleBlobDetector_create(params)
 
 i = 1
 
-leituras = {
+arrayReadings = {
     1: 0,
     2: 0,
     3: 0,
@@ -68,7 +68,7 @@ while True:
             cv2.imshow("VIDEO", im_with_keypoints)
 
         #read only even frames, as it is not necessary to read all frames as this slows down the video
-        if contador % 2 == 0:
+        if counter % 2 == 0:
             #Read the quantity of blobs detected
             reading = len(keypoints)
 
@@ -83,11 +83,11 @@ while True:
             if display[-1] != display[-2] and display[-1] != 0:
                 #Print the text in console to show the number of the move, and its result
                 text = f"jogada n°{i} --> LADO {display[-1]}"
-                leituras[display[-1]] = leituras[display[-1]] + 1
+                arrayReadings[display[-1]] = arrayReadings[display[-1]] + 1
                 i = i + 1
                 print(text)
 
-        contador += 1
+        counter += 1
 
     #If the user press 'c', we close and quit the video 
     if cv2.waitKey(25) & 0xFF == ord('c'):
@@ -97,7 +97,7 @@ while True:
 
 #HERE, WE ALREADY FINISHED READ THE VIDEO, AND WE WILL ANALISE THE VALUES OBTAINED
 
-values = list(leituras.values())
+values = list(arrayReadings.values())
 
 #Print the quantity of times each face was obtained 
 print("\nA QUANTIDADE VEZES QUE CADA FACE SAIU, RESPECTIVAMENTE, É DE:")
