@@ -3,6 +3,8 @@ import numpy as np
 from collections import deque
 from scipy.stats import chisquare
 
+#HERE WE SET THE VALUES OF THE VARIABLES AND PARAMS
+
 video = cv2.VideoCapture('videoDices.mp4')
 video.set(15, -4)
 contador = 0
@@ -39,6 +41,7 @@ leituras = {
     6: 0
 }
 
+#HERE WE READ EACH EVEN FRAME OF VIDEO, ANALISE IT AND PUT IT INTO VARIABLES TO ANALISE THE VALUES OBTAINED AFTER
 
 while True:
     #Reading the frame of video
@@ -90,7 +93,9 @@ while True:
     if cv2.waitKey(25) & 0xFF == ord('c'):
         break
 
-#Here, we already finished to read the video, and we will analise the values obtained
+
+
+#HERE, WE ALREADY FINISHED READ THE VIDEO, AND WE WILL ANALISE THE VALUES OBTAINED
 
 values = list(leituras.values())
 
